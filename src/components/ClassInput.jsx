@@ -108,24 +108,31 @@ class ClassInput extends Component {
         {/* The list of all the To-Do's, displayed */}
         <ul>
           {this.state.todos.map((todo) => (
-            <li key={todo.title}>
-              {todo.title}
-              <button onClick={() => this.handleDelete(todo.title)}>
-                Delete
-              </button>
-              <button onClick={() => this.handleEdit(todo.title)}>Edit</button>
-              {todo.edit ? (
-                <form onSubmit={this.handleEditSubmit}>
-                  <input
-                    type="text"
-                    name="task-entry"
-                    value={this.state.editInputVal}
-                    onChange={this.handleEditInputChange}
-                  ></input>
-                  <button type="submit">Submit</button>
-                </form>
-              ) : null}
-            </li>
+            <>
+              <li key={todo.title}>
+                {!todo.edit ? (
+                  <>
+                    {todo.title}
+                    <button onClick={() => this.handleDelete(todo.title)}>
+                      Delete
+                    </button>
+                    <button onClick={() => this.handleEdit(todo.title)}>
+                      Edit
+                    </button>
+                  </>
+                ) : (
+                  <form onSubmit={this.handleEditSubmit}>
+                    <input
+                      type="text"
+                      name="task-entry"
+                      value={this.state.editInputVal}
+                      onChange={this.handleEditInputChange}
+                    ></input>
+                    <button type="submit">Resubmit</button>
+                  </form>
+                )}
+              </li>
+            </>
           ))}
         </ul>
       </section>
